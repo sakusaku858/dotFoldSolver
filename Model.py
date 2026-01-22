@@ -109,6 +109,28 @@ class Model:
         head = [target_script, dotstr]
 
         result_str = subprocess.check_output(head, text=True, encoding="utf-8")
+        print(result_str)
+
+        cpstr = ""
+        corners = []
+        for line in result_str.splitlines():
+            if line.startswith("CPSTR:"):
+                cpstr = line.split(":")[1].strip()
+            if line.startswith("CORNERS:"):
+                corners = line.split(":")[1].strip().split()
+
+        if cpstr != "":
+            # TileDrawer.pyを実行して描画する
+            # 引数: cpstr c1 c2 c3 c4
+            cmd = [
+                sys.executable,
+                os.path.join(script_dir, "TileDrawer.py"),
+                cpstr,
+            ] + corners
+            subprocess.Popen(cmd)
+
+        if cpstr == "":
+            messagebox.showwarning("Alert", "No CP was found.")
 
     def switch_dot(self, row, col):
         value = (self.dots[row][col] + 1) % 2

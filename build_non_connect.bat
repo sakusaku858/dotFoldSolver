@@ -1,0 +1,1 @@
+g++ solve_non_connect.cpp foldsToEdges.cpp boundary_extractor.hpp ftcp.cpp -fopenmp -O3 -o solve_non_connect.exe
