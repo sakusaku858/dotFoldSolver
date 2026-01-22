@@ -1,0 +1,6 @@
+@echo off
+echo Compiling...
+g++ .\dotToGraph.cpp .\BoundaryGraph.cpp .\loopToFolds.cpp .\foldsToEdges.cpp .\ftcp.cpp -O3 -fopenmp -lpsapi -o dotToGraph.exe
+if %errorlevel% neq 0 exit /b %errorlevel%
+echo Build successful. Running...
+.\dotToGraph.exe
